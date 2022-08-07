@@ -1,7 +1,9 @@
 import {
+  IsDateString,
   IsEmail,
   IsNotEmpty,
   IsNumberString,
+  IsOptional,
   IsString,
   Length,
   MaxLength,
@@ -15,9 +17,9 @@ class UserAuth {
   @Length(10)
   @IsNumberString()
   readonly identification: string;
+  @IsString()
   @MinLength(5)
   @MaxLength(30)
-  @IsString()
   readonly password: string;
 }
 
@@ -34,9 +36,16 @@ export class UserRegisterDTO extends UserAuth {
   @IsEmail()
   readonly email: string;
   @IsString()
+  @IsDateString()
   readonly birthday: string;
   @IsString()
+  @MinLength(10)
+  @MaxLength(10)
+  @IsNumberString()
+  @IsOptional()
   readonly phone_number: string;
   @IsString()
+  @MinLength(5)
+  @MaxLength(30)
   readonly repeat_password: string;
 }

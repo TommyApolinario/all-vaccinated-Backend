@@ -2,35 +2,46 @@ import {
   BadRequestException,
   Body,
   Controller,
+  InternalServerErrorException,
   Post,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
+
+import { UsersService } from '../services/users.service';
 import { UserLoginDTO, UserRegisterDTO } from '../dtos';
-import { UsersService } from '../users.service';
+import { AuthService } from '../services/auth.service';
 
 @Controller('auth')
-@UsePipes(ValidationPipe)
 export class AuthController {
-  public constructor(private readonly service: UsersService) {}
+  public constructor(
+    private readonly service: UsersService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post('login')
-  public loginUser(@Body() user: UserLoginDTO) {
-    return user;
+  public async loginUser(@Body() user: UserLoginDTO) {
+    try {
+      return await this.authService.login(user);
+    } catch (_) {
+      throw new InternalServerErrorException(
+        'Error en el servidor, trate de nuevo luego',
+      );
+    }
   }
 
   @Post('register')
   public async create(@Body() user: UserRegisterDTO) {
     if (user.password !== user.repeat_password) throw new BadRequestException();
 
-    return await this.service.create({
-      birthday: user.birthday,
-      email: user.email,
-      identification: user.identification,
-      name: user.name,
-      surname: user.surname,
-      password: user.password,
-      phoneNumber: user.phone_number,
-    });
+    try {
+      return await this.service.create({
+        ...user,
+        phoneNumber: user.phone_number,
+      });
+    } catch (err) {
+      if (err instanceof BadRequestException) throw err;
+      throw new InternalServerErrorException(
+        'Error en el servidor, trate de nuevo luego',
+      );
+    }
   }
 }

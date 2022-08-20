@@ -1,5 +1,4 @@
-import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Person {
@@ -10,7 +9,6 @@ export class Person {
     length: 10,
     name: 'identification',
     nullable: false,
-    unique: true,
   })
   public identification: string;
 
@@ -24,7 +22,6 @@ export class Person {
     length: 50,
     name: 'email',
     nullable: false,
-    unique: true,
   })
   public email: string;
 
@@ -42,7 +39,4 @@ export class Person {
 
   // @Column('datetime', { name: 'deleted_at', nullable: true })
   // public deletedAt: Date | null;
-
-  @OneToOne(() => User, (user) => user.person, { cascade: false })
-  public user: User;
 }

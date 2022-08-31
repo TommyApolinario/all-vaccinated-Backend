@@ -21,6 +21,7 @@ export class UsersService {
   ): Promise<never | Partial<User>> {
     const person = this.personRepository.create({
       ...userToCreate,
+      birthday: new Date(userToCreate.birthday),
     });
     const userFound = await this.personRepository.findOne({
       where: {

@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Person {
@@ -28,15 +34,6 @@ export class Person {
   @Column('varchar', { length: 10, name: 'phone_number', nullable: true })
   public phoneNumber: string | null;
 
-  // @Column('date', { name: 'birthday', nullable: false })
-  // public birthday: Date;
-
-  // @Column('datetime', { name: 'created_at', nullable: false })
-  // public createdAt: Date;
-
-  // @Column('datetime', { name: 'updated_at', nullable: true })
-  // public updatedAt: Date | null;
-
-  // @Column('datetime', { name: 'deleted_at', nullable: true })
-  // public deletedAt: Date | null;
+  @Column('date', { name: 'birthday', nullable: false })
+  public birthday: Date;
 }

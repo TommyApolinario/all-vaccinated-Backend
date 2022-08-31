@@ -4,6 +4,7 @@ import {
   Controller,
   InternalServerErrorException,
   Post,
+  UnauthorizedException,
 } from '@nestjs/common';
 
 import { UsersService } from '../services/users.service';
@@ -21,7 +22,8 @@ export class AuthController {
   public async loginUser(@Body() user: UserLoginDTO) {
     try {
       return await this.authService.login(user);
-    } catch (_) {
+    } catch (err) {
+      if (err instanceof UnauthorizedException) throw err;
       throw new InternalServerErrorException(
         'Error en el servidor, trate de nuevo luego',
       );

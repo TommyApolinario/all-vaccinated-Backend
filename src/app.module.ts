@@ -3,6 +3,8 @@ import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { configuration, validationSchema } from './../config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { VaccinesModule } from './vaccines/vacunas.module';
+import { LaboratoryModule } from './laboratory/laboratory.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: process.env.NODE_ENV === 'development',
     }),
+    VaccinesModule,
+    LaboratoryModule,
   ],
   controllers: [],
   providers: [],

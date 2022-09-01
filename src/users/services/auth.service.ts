@@ -1,5 +1,9 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 
 import { comparePasswords } from '../utils/password-manager';
@@ -20,6 +24,7 @@ export class AuthService {
       relations: { person: true },
       where: { person: { identification: userToLogin.identification } },
     });
+    if (!user) throw new NotFoundException('Usuario no encontrado');
     const success = await comparePasswords(user.password, userToLogin.password);
     if (!success) throw new UnauthorizedException();
     return {

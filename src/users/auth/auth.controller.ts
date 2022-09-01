@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   InternalServerErrorException,
+  NotFoundException,
   Post,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -24,6 +25,7 @@ export class AuthController {
       return await this.authService.login(user);
     } catch (err) {
       if (err instanceof UnauthorizedException) throw err;
+      if (err instanceof NotFoundException) throw err;
       throw new InternalServerErrorException(
         'Error en el servidor, trate de nuevo luego',
       );

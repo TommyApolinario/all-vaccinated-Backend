@@ -16,7 +16,7 @@ export class VaccineCreateDTO {
   readonly description: string;
   @IsString()
   @IsNotEmpty()
-  @MinLength(15)
+  @MinLength(5)
   @MaxLength(15)
   readonly lote: string;
   @IsString()

@@ -2,7 +2,8 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Laboratory } from 'src/laboratory/entities/laboratory.entity';
 import { Repository } from 'typeorm';
-import { VaccineCreateDTO } from '../dtos/create.vacuna.dto';
+import { VaccineCreateDTO } from '../dtos/create.vaccine.dto';
+import { VaccineUpdateDTO } from '../dtos/update.vaccine.dto';
 import { Vaccine } from '../entities/vaccine.entity';
 
 @Injectable()
@@ -52,5 +53,30 @@ export class VaccineService {
       laboratory,
     });
     return await this.vaccineRepository.save(vaccine);
+  }
+
+  public async update(
+    id: number,
+    vaccineToUpdate: VaccineUpdateDTO,
+  ): Promise<boolean> {
+    const result = await this.vaccineRepository.update(
+      {
+        id,
+      },
+      {
+        name: vaccineToUpdate.name,
+        lote: vaccineToUpdate.lote,
+        admissionDate: vaccineToUpdate.admission_date,
+        expirationDate: vaccineToUpdate.expiration_date,
+      },
+    );
+    return result.affected > 0;
+  }
+
+  public async delete(id: number): Promise<boolean> {
+    const result = await this.vaccineRepository.delete({
+      id,
+    });
+    return result.affected > 0;
   }
 }

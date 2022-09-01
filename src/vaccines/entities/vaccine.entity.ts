@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -34,7 +34,7 @@ export class Vaccine {
   })
   public lote: string;
 
-  @OneToOne(() => Laboratory, (laboratory) => laboratory.id, {
+  @ManyToOne(() => Laboratory, (laboratory) => laboratory.id, {
     cascade: false,
     createForeignKeyConstraints: true,
   })

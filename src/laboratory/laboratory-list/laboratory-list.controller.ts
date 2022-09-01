@@ -1,11 +1,11 @@
-import { Controller, InternalServerErrorException, Post } from '@nestjs/common';
+import { Controller, Get, InternalServerErrorException } from '@nestjs/common';
 import { LaboratoryService } from '../laboratory.service';
 
 @Controller('laboratory')
 export class LaboratoryListController {
   public constructor(private service: LaboratoryService) {}
 
-  @Post('')
+  @Get('')
   public async listLaboratories() {
     try {
       return await this.service.getLaboratories();

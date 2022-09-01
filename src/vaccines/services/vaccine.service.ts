@@ -22,6 +22,8 @@ export class VaccineService {
         description: true,
         lote: true,
         quantity: true,
+        admissionDate: true,
+        expirationDate: true,
         laboratory: {
           id: true,
           name: true,

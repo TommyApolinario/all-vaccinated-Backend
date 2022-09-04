@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Laboratory } from '../laboratory/entities/laboratory.entity';
-import { LaboratoryModule } from 'src/laboratory/laboratory.module';
+import { LaboratoryModule } from '../laboratory/laboratory.module';
 import { Vaccine } from './entities/vaccine.entity';
 import { VaccineService } from './services/vaccine.service';
 import { VaccineCreateController } from './vaccine-create/vaccine-create.controller';

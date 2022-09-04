@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Laboratory } from 'src/laboratory/entities/laboratory.entity';
+import { Laboratory } from '../../laboratory/entities/laboratory.entity';
 import { Repository } from 'typeorm';
 import { VaccineCreateDTO } from '../dtos/create.vaccine.dto';
 import { VaccineUpdateDTO } from '../dtos/update.vaccine.dto';

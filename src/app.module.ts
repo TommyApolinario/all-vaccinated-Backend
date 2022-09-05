@@ -5,6 +5,8 @@ import { configuration, validationSchema } from './../config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { VaccinesModule } from './vaccines/vacunas.module';
 import { LaboratoryModule } from './laboratory/laboratory.module';
+import { DoctorsModule } from './doctors/doctors.module';
+import { PersonModule } from './person/person.module';
 
 @Module({
   imports: [
@@ -27,8 +29,9 @@ import { LaboratoryModule } from './laboratory/laboratory.module';
     }),
     VaccinesModule,
     LaboratoryModule,
+    DoctorsModule,
+    PersonModule,
   ],
-  controllers: [],
   providers: [],
 })
 export class AppModule {}

@@ -5,7 +5,7 @@ import { omit } from 'lodash';
 
 import { encryptPassword } from '../utils/password-manager';
 import { CreateUserDTO } from '../dtos/create.user.dto';
-import { Person } from '../../entities/person.entity';
+import { Person } from '../../person/entities/person.entity';
 import { User } from '../entities/user.entity';
 
 @Injectable()

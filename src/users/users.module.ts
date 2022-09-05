@@ -4,7 +4,7 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './auth/auth.controller';
 import { UsersService } from './services/users.service';
 import { AuthService } from './services/auth.service';
-import { Person } from '../entities/person.entity';
+import { Person } from '../person/entities/person.entity';
 import { User } from './entities/user.entity';
 
 @Module({

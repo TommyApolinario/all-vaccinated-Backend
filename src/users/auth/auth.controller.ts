@@ -42,6 +42,7 @@ export class AuthController {
         phoneNumber: user.phone_number,
       });
     } catch (err) {
+      console.log(err);
       if (err instanceof BadRequestException) throw err;
       throw new InternalServerErrorException(
         'Error en el servidor, trate de nuevo luego',

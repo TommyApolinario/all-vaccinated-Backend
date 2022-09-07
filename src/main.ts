@@ -14,6 +14,6 @@ async function bootstrap() {
   });
   app.useGlobalPipes(...GlobalPipesArray);
 
-  await app.listen(80);
+  await app.listen(4200);
 }
 bootstrap();

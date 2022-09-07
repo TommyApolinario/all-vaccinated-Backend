@@ -25,6 +25,7 @@ import { PersonModule } from './person/person.module';
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       autoLoadEntities: true,
+
       synchronize: process.env.NODE_ENV === 'development',
     }),
     VaccinesModule,

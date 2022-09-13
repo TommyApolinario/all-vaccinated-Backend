@@ -5,6 +5,8 @@ import { configuration, validationSchema } from './../config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { VaccinesModule } from './vaccines/vacunas.module';
 import { LaboratoryModule } from './laboratory/laboratory.module';
+import { DoctorsModule } from './doctors/doctors.module';
+import { PersonModule } from './person/person.module';
 
 @Module({
   imports: [
@@ -16,19 +18,22 @@ import { LaboratoryModule } from './laboratory/laboratory.module';
       validationSchema,
     }),
     TypeOrmModule.forRoot({
-      type: process.env.DATABASE_TYPE,
+      type: 'postgres',
       host: process.env.DATABASE_HOST,
       port: +process.env.DATABASE_PORT,
       database: process.env.DATABASE_NAME,
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       autoLoadEntities: true,
-      synchronize: process.env.NODE_ENV === 'development',
+      ssl: { rejectUnauthorized: false },
+
+      synchronize: true,
     }),
     VaccinesModule,
     LaboratoryModule,
+    DoctorsModule,
+    PersonModule,
   ],
-  controllers: [],
   providers: [],
 })
 export class AppModule {}

@@ -9,11 +9,11 @@ async function bootstrap() {
 
   app.enableCors({
     origin: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
+    methods: ['GET', 'POST', 'OPTIONS', 'DELETE', 'PUT'],
     allowedHeaders: '*',
   });
   app.useGlobalPipes(...GlobalPipesArray);
 
-  await app.listen(80);
+  await app.listen(parseInt(process.env.PORT));
 }
 bootstrap();

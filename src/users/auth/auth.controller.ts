@@ -24,6 +24,7 @@ export class AuthController {
     try {
       return await this.authService.login(user);
     } catch (err) {
+      console.log(err);
       if (err instanceof UnauthorizedException) throw err;
       if (err instanceof NotFoundException) throw err;
       throw new InternalServerErrorException(
@@ -42,7 +43,6 @@ export class AuthController {
         phoneNumber: user.phone_number,
       });
     } catch (err) {
-      console.log(err);
       if (err instanceof BadRequestException) throw err;
       throw new InternalServerErrorException(
         'Error en el servidor, trate de nuevo luego',

@@ -22,7 +22,18 @@ export class AuthService {
     userToLogin: UserLoginDTO,
   ): Promise<never | { success: true; token: string }> {
     const user: Partial<User> = await this.userRepository.findOne({
-      select: { id: true, password: true, person: { id: false } },
+      select: {
+        id: true,
+        password: true,
+        person: {
+          id: true,
+          name: true,
+          surname: true,
+          email: true,
+          identification: true,
+          phoneNumber: true,
+        },
+      },
       relations: { person: true },
       where: { person: { identification: userToLogin.identification } },
     });

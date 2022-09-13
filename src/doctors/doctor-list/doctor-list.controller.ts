@@ -1,5 +1,5 @@
 import { Controller, Get, InternalServerErrorException } from '@nestjs/common';
-import { DoctorsService } from 'src/doctors/doctors.service';
+import { DoctorsService } from '../doctors.service';
 
 @Controller('doctors')
 export class DoctorListController {

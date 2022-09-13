@@ -9,7 +9,9 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../../guards/jwt-auth.guards';
 import { VaccineCreateDTO } from '../dtos/create.vaccine.dto';
 import { VaccineUpdateDTO } from '../dtos/update.vaccine.dto';
 import { VaccineService } from '../services/vaccine.service';
@@ -18,6 +20,7 @@ import { VaccineService } from '../services/vaccine.service';
 export class VaccineCreateController {
   public constructor(private service: VaccineService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('')
   public async listVaccines() {
     try {
@@ -29,6 +32,7 @@ export class VaccineCreateController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('')
   public async createVaccine(@Body() vaccine: VaccineCreateDTO) {
     try {
@@ -41,6 +45,7 @@ export class VaccineCreateController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   public async updateVaccine(
     @Param('id', ParseIntPipe) id: number,
@@ -57,6 +62,7 @@ export class VaccineCreateController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   public async deleteVaccine(@Param('id', ParseIntPipe) id: number) {
     try {

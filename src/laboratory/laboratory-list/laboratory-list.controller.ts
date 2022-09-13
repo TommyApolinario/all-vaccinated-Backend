@@ -1,10 +1,17 @@
-import { Controller, Get, InternalServerErrorException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  InternalServerErrorException,
+  UseGuards,
+} from '@nestjs/common';
+import { JwtAuthGuard } from '../../guards/jwt-auth.guards';
 import { LaboratoryService } from '../laboratory.service';
 
 @Controller('laboratory')
 export class LaboratoryListController {
   public constructor(private service: LaboratoryService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('')
   public async listLaboratories() {
     try {

@@ -1,5 +1,7 @@
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+
 import { UsersModule } from './users/users.module';
 import { configuration, validationSchema } from './../config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,6 +9,7 @@ import { VaccinesModule } from './vaccines/vacunas.module';
 import { LaboratoryModule } from './laboratory/laboratory.module';
 import { DoctorsModule } from './doctors/doctors.module';
 import { PersonModule } from './person/person.module';
+import { JwtStrategy } from './users/jwt.strategy';
 
 @Module({
   imports: [
@@ -29,11 +32,15 @@ import { PersonModule } from './person/person.module';
 
       synchronize: true,
     }),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET_KEY,
+      signOptions: { expiresIn: '20h' },
+    }),
     VaccinesModule,
     LaboratoryModule,
     DoctorsModule,
     PersonModule,
   ],
-  providers: [],
+  providers: [JwtStrategy],
 })
 export class AppModule {}

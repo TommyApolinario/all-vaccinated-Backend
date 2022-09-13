@@ -3,14 +3,17 @@ import {
   Get,
   InternalServerErrorException,
   Param,
+  UseGuards,
 } from '@nestjs/common';
 import { NotFoundError } from 'rxjs';
+import { JwtAuthGuard } from '../../guards/jwt-auth.guards';
 import { PersonService } from '../person.service';
 
 @Controller('person')
 export class PersonListController {
   public constructor(private service: PersonService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get(':identification')
   public async listPerson(@Param('identification') identification: string) {
     try {
